@@ -12,9 +12,14 @@ Namespace Controllers
             Return mhsDb.GetAllDapper()
         End Function
 
-        ' GET: api/Mahasiswa/5
-        Public Function GetValue(ByVal id As Integer) As String
-            Return "value"
+        ' GET: http://localhost:53712/api/Mahasiswa/72098787
+        Public Function GetValue(ByVal id As String) As Mahasiswa
+            Return mhsDb.GetById(id)
+        End Function
+
+        <Route("api/Mahasiswa/GetByNama/{id}")>
+        Public Function GetByNama(id As String)
+            Return mhsDb.GetByNama(id)
         End Function
 
         ' POST: api/Mahasiswa

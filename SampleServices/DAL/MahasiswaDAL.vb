@@ -15,6 +15,25 @@ Public Class MahasiswaDAL
         End Using
     End Function
 
+    Public Function GetById(nim As String) As Mahasiswa
+        Using conn As New MySqlConnection(GetConnString())
+            Dim strSql = "select * from mahasiswa where Nim=@Nim"
+            'memasukan parameter nim
+            Dim param As New With {.Nim = nim}
+            Dim result = conn.QuerySingle(Of Mahasiswa)(strSql, param)
+            Return result
+        End Using
+    End Function
+
+    Public Function GetByNama(nama As String) As IEnumerable(Of Mahasiswa)
+        Using conn As New MySqlConnection(GetConnString())
+            Dim strSql = "select * from mahasiswa where Nama like @Nama"
+            Dim param As New With {.Nama = "%" & nama & "%"}
+            Dim results = conn.Query(Of Mahasiswa)(strSql, param)
+            Return results
+        End Using
+    End Function
+
     Public Function GetAll() As IEnumerable(Of Mahasiswa)
         Using conn As New MySqlConnection(GetConnString())
             Dim lstMhs As New List(Of Mahasiswa)
