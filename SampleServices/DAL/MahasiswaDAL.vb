@@ -64,4 +64,17 @@ Public Class MahasiswaDAL
             Return lstMhs
         End Using
     End Function
+
+    Public Sub Insert(mhs As Mahasiswa)
+        Using conn As New MySqlConnection(GetConnString())
+            Dim strSql = "insert into Mahasiswa(Nim,Nama,IPK) values(@Nim,@Nama,@IPK)"
+            Try
+                Dim param = New With {
+                .Nim = mhs.Nim, .Nama = mhs.Nama, .IPK = mhs.IPK}
+                conn.Execute(strSql, param)
+            Catch sqlEx As MySqlException
+                Throw New Exception($"Error: {sqlEx.Message}")
+            End Try
+        End Using
+    End Sub
 End Class
