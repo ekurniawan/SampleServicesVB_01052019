@@ -1,9 +1,18 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Configuration
+Imports Dapper
 
 Public Class MahasiswaDAL
     Public Function GetConnString() As String
         Return ConfigurationManager.ConnectionStrings("MyConnection").ConnectionString
+    End Function
+
+    Public Function GetAllDapper() As IEnumerable(Of Mahasiswa)
+        Using conn As New MySqlConnection(GetConnString())
+            Dim strSql = "select * from mahasiswa order by Nama"
+            Dim results = conn.Query(Of Mahasiswa)(strSql)
+            Return results
+        End Using
     End Function
 
     Public Function GetAll() As IEnumerable(Of Mahasiswa)

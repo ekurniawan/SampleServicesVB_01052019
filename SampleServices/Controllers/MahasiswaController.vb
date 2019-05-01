@@ -9,7 +9,7 @@ Namespace Controllers
 
         ' GET: api/Mahasiswa
         Public Function GetValues() As IEnumerable(Of Mahasiswa)
-            Return mhsDb.GetAll()
+            Return mhsDb.GetAllDapper()
         End Function
 
         ' GET: api/Mahasiswa/5
