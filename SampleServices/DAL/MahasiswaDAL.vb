@@ -77,4 +77,16 @@ Public Class MahasiswaDAL
             End Try
         End Using
     End Sub
+
+    Public Sub Update(mhs As Mahasiswa)
+        Using conn As New MySqlConnection(GetConnString())
+            Dim strSql = "update mahasiswa set Nama=@Nama,IPK=@IPK where Nim=@Nim"
+            Try
+                Dim param = New With {.Nama = mhs.Nama, .IPK = mhs.IPK, .Nim = mhs.Nim}
+                conn.Execute(strSql, param)
+            Catch ex As MySqlException
+                Throw New Exception($"Error: {ex.Message}")
+            End Try
+        End Using
+    End Sub
 End Class

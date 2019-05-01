@@ -38,9 +38,14 @@ Namespace Controllers
         End Function
 
         ' PUT: api/Mahasiswa/5
-        Public Sub PutValue(ByVal id As Integer, <FromBody()> ByVal value As String)
-
-        End Sub
+        Public Function PutValue(mhs As Mahasiswa) As IHttpActionResult
+            Try
+                mhsDb.Update(mhs)
+                Return Ok("Data berhasil di diupdate")
+            Catch ex As Exception
+                Return BadRequest($"Error: {ex.Message}")
+            End Try
+        End Function
 
         ' DELETE: api/Mahasiswa/5
         Public Sub DeleteValue(ByVal id As Integer)
