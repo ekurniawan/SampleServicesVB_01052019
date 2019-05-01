@@ -48,8 +48,13 @@ Namespace Controllers
         End Function
 
         ' DELETE: api/Mahasiswa/5
-        Public Sub DeleteValue(ByVal id As Integer)
-
-        End Sub
+        Public Function DeleteValue(id As String) As IHttpActionResult
+            Try
+                mhsDb.Delete(id)
+                Return Ok($"Data dengan id {id} berhasil didelete")
+            Catch ex As Exception
+                Return BadRequest($"Error: {ex.Message}")
+            End Try
+        End Function
     End Class
 End Namespace

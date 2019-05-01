@@ -89,4 +89,16 @@ Public Class MahasiswaDAL
             End Try
         End Using
     End Sub
+
+    Public Sub Delete(nim As String)
+        Using conn As New MySqlConnection(GetConnString())
+            Dim strSql = "delete from mahasiswa where Nim=@Nim"
+            Try
+                Dim param = New With {.Nim = nim}
+                conn.Execute(strSql, param)
+            Catch ex As MySqlException
+                Throw New Exception($"Error: {ex.Message}")
+            End Try
+        End Using
+    End Sub
 End Class
