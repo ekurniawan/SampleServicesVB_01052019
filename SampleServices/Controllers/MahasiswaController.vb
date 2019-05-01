@@ -22,6 +22,11 @@ Namespace Controllers
             Return mhsDb.GetByNama(id)
         End Function
 
+        <Route("api/Mahasiswa/GetAllAmbil")>
+        Public Function GetAllAmbil() As IEnumerable(Of Pengambilan)
+            Return mhsDb.GetAllAmbil()
+        End Function
+
         ' POST: api/Mahasiswa
         Public Sub PostValue(<FromBody()> ByVal value As String)
 

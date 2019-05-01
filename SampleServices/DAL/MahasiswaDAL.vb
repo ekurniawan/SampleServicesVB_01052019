@@ -15,6 +15,14 @@ Public Class MahasiswaDAL
         End Using
     End Function
 
+    Public Function GetAllAmbil() As IEnumerable(Of Pengambilan)
+        Using conn As New MySqlConnection(GetConnString())
+            Dim strSql = "select m.Nim,m.Nama,m.IPK,a.AmbilId,a.Matakuliah,a.Sks from mahasiswa m inner join ambil a on m.Nim=a.Nim"
+            Dim results = conn.Query(Of Pengambilan)(strSql)
+            Return results
+        End Using
+    End Function
+
     Public Function GetById(nim As String) As Mahasiswa
         Using conn As New MySqlConnection(GetConnString())
             Dim strSql = "select * from mahasiswa where Nim=@Nim"
